@@ -1,0 +1,38 @@
+<%- include("partials/header", { title }) %>
+<%- include("partials/nav") %>
+<main class="container">
+  <h1>Dashboard</h1>
+  <p class="muted">Welcome, <%= adminEmail %></p>
+
+  <section class="grid-two">
+    <div class="card stat-card">
+      <h3>Total Movies</h3>
+      <p class="stat"><%= movieCount %></p>
+    </div>
+    <div class="card stat-card">
+      <h3>Total Users</h3>
+      <p class="stat"><%= userCount %></p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Top Viewed Movies</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>View Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% topMovies.forEach((movie) => { %>
+          <tr>
+            <td><%= movie.title %></td>
+            <td><%= movie.viewCount %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+</main>
+<%- include("partials/footer") %>

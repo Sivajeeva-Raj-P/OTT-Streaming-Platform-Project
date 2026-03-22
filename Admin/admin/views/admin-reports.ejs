@@ -1,0 +1,24 @@
+<%- include("partials/header", { title }) %>
+<%- include("partials/nav") %>
+<main class="container">
+  <h1>Movie View Report</h1>
+  <section class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Movie</th>
+          <th>View Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movies.forEach((movie) => { %>
+          <tr>
+            <td><%= movie.title %></td>
+            <td><%= movie.viewCount %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+</main>
+<%- include("partials/footer") %>

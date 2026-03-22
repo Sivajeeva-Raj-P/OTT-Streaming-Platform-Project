@@ -1,0 +1,11 @@
+<%- include("partials/header", { title: "Error" }) %>
+<main class="container narrow">
+  <section class="card">
+    <h1><%= message %></h1>
+    <p>Status: <%= error.status || 500 %></p>
+    <% if (error.stack) { %>
+      <pre><%= error.stack %></pre>
+    <% } %>
+  </section>
+</main>
+<%- include("partials/footer") %>

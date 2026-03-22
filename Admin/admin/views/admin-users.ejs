@@ -1,0 +1,44 @@
+<%- include("partials/header", { title }) %>
+<%- include("partials/nav") %>
+<main class="container">
+  <h1>User Management</h1>
+
+  <section class="card">
+    <form method="GET" action="/admin/users" class="search-row">
+      <input type="text" name="search" placeholder="Search by name or email" value="<%= search %>" />
+      <button type="submit">Search</button>
+      <a href="/admin/users" class="btn-light">Reset</a>
+    </form>
+  </section>
+
+  <section class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user) => { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><span class="<%= user.isBlocked ? 'badge-danger' : 'badge-ok' %>"><%= user.isBlocked ? 'Blocked' : 'Active' %></span></td>
+            <td class="actions">
+              <form method="POST" action="/admin/users/<%= user._id %>/toggle-block">
+                <button type="submit" class="<%= user.isBlocked ? 'btn-light' : 'danger-btn' %>">
+                  <%= user.isBlocked ? "Unblock" : "Block" %>
+                </button>
+              </form>
+              <a class="btn-light" href="/admin/users/<%= user._id %>/history">View History</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+</main>
+<%- include("partials/footer") %>

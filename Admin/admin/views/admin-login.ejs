@@ -1,0 +1,18 @@
+<%- include("partials/header", { title }) %>
+<div class="auth-wrap">
+  <form class="card auth-card" method="POST" action="/admin/login">
+    <h2>Admin Login</h2>
+    <p class="muted">Use your admin email and password to continue.</p>
+    <% if (error) { %>
+      <p class="error-msg"><%= error %></p>
+    <% } %>
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Password</label>
+    <input type="password" name="password" required />
+    <button type="submit">Login</button>
+    <p class="hint">Default: admin@ott.com / Admin@123</p>
+    <p class="hint">Open this admin panel at: http://localhost:5000/admin/login</p>
+  </form>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,51 @@
+<%- include("partials/header", { title }) %>
+<%- include("partials/nav") %>
+<main class="container">
+  <h1>Movie Management</h1>
+
+  <section class="card">
+    <h3><%= editMovie ? "Edit Movie" : "Create Movie" %></h3>
+    <form
+      method="POST"
+      action="<%= editMovie ? '/admin/movies/edit/' + editMovie._id : '/admin/movies' %>"
+      class="form-grid"
+    >
+      <input type="text" name="title" placeholder="Title" required value="<%= editMovie ? editMovie.title : '' %>" />
+      <input type="text" name="thumbnailUrl" placeholder="Thumbnail URL" required value="<%= editMovie ? editMovie.thumbnailUrl : '' %>" />
+      <input type="text" name="videoUrl" placeholder="Video URL" required value="<%= editMovie ? editMovie.videoUrl : '' %>" />
+      <textarea name="description" rows="4" placeholder="Description" required><%= editMovie ? editMovie.description : '' %></textarea>
+      <button type="submit"><%= editMovie ? "Update Movie" : "Add Movie" %></button>
+      <% if (editMovie) { %><a href="/admin/movies" class="btn-light">Cancel Edit</a><% } %>
+    </form>
+  </section>
+
+  <section class="card">
+    <h3>All Movies</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Views</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movies.forEach((movie) => { %>
+          <tr>
+            <td><%= movie.title %></td>
+            <td class="table-desc"><%= movie.description %></td>
+            <td><%= movie.viewCount %></td>
+            <td class="actions">
+              <a class="btn-light" href="/admin/movies/edit/<%= movie._id %>">Edit</a>
+              <form method="POST" action="/admin/movies/delete/<%= movie._id %>">
+                <button type="submit" class="danger-btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+</main>
+<%- include("partials/footer") %>
